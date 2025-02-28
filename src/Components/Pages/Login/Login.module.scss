@@ -1,0 +1,107 @@
+.containerImagem {
+    // border: solid;
+    img{
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        // border: solid red;
+    }
+}
+
+.mainLogin {
+    // border: solid blue;
+    display: flex;
+    flex-direction: center;
+    // background-color: pink;
+    height: 100vh;
+}
+
+.containerForms {
+    // border: solid blue;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img{
+        // border: solid purple;
+        margin-bottom: 1rem;
+    }
+
+    h1{
+        // border: solid;
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 8px;
+        width: 58%;
+    }
+
+    p{
+        // border: solid;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #0844c4;
+    }
+}
+
+.formLogin {
+    // border: solid;
+    width: 70%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    input{
+        width: 75%;
+        height: 5vh;
+        border-radius: 6px;
+        border: 1px solid #b8babd;
+        margin-bottom: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    input:hover{
+        border-color: #23282f;
+    }
+
+    input:focus{
+        border-color: #fff;
+        box-shadow: 00px 0px 5px 1px #cbd4E1;
+    }
+
+    a{
+        font-size: 1rem;
+        font-weight: bold;
+        color: black;
+    }
+
+    div{
+        // border: solid ;
+        display: flex;
+        justify-content: space-between;
+        width: 63%;
+    }
+
+    .buttonEntrar {
+        border: #001A3D;
+        background-color: #001A3D;
+        color: white;
+        font-weight: bold;
+        width: 40%;
+        height: 4vh;
+        border-radius: 3px;
+    }
+    .buttonEntrar:hover{
+        cursor: pointer;
+        background-color: #0844c4;
+    }
+
+    .buttonCriar {
+        @extend .buttonEntrar;
+        border: #00BEDD;
+        background-color: #00BEDD;
+    }
+}
