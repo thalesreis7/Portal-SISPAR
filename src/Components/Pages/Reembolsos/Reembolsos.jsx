@@ -1,3 +1,4 @@
+import styles from '../../Pages/Reembolsos/Reembolsos.module.scss'
 import React from 'react'
 import Home from '../../../assets/Dashboard/home header.png'
 import Seta from '../../../assets/Dashboard/Vector.png'
@@ -12,59 +13,72 @@ import SistemaAtualizado from '../../../assets/Dashboard/Sistema-atualizado.png'
 
 export default function Reembolsos() {
   return (
-    <div>
-     <div></div>
-     <header>
-        <img src={Home} alt="Casinha Header" />
-        <img src={Seta} alt="Seta indicativa a reembolsos" />
-        <p>Reemblosos</p>
-       </header>
-       <main>
-        <div>
-          <h1>Sistema de Reembolsos</h1>
-          <p>Solicite novos pedidos de reembolso, vizualize solicitações em alálise e todo o histórico.</p>
+    <div className={styles.container} >
+            <div>
+            <header>
+                <img src={Home} alt="Casinha Header" />
+                <img src={Seta} alt="seta indicativa ao reembolsos" />
+                <p>Reembolsos</p>
+            </header>
+
+            <main className={styles.mainReembolsos}>
+
+                <div> 
+                <h1>Sistema de Reembolsos</h1>
+                <p>Solicite novos pedidos de reembolso, vizualize solicitações em alálise e todo o histórico.</p>
+                </div>
+
+                <section className={styles.containerCards}>
+
+                    <article className={styles.card}>
+                        <img src={SolicitarReembolso} alt="" />
+                        <p>Solicitar Reembolso</p>
+                    </article>
+
+                    <article className={styles.card}>
+                        <img src={Análise} alt="Análise do reembolso" />
+                        <p>Verificar Análises</p>
+                    </article>
+
+                    <article className={styles.card}>
+                        <img src={SolicitarHistorico} alt="" />
+                        <p>Histórico</p>
+                    </article>
+                </section>
+
+                <section className={styles.containerStatus}>
+                    <div>
+                    <img className={styles.imgSolicitados} src={NumerosSolicitados} alt="" />
+                    <h4>182</h4>
+                    <p>Solicitados</p>
+                    </div>
+
+                    <div>
+                    <img className={styles.imgAnalises} src={NumeroAnálise} alt="" />
+                    <h4>74</h4>
+                    <p>Em análise</p>
+                    </div>
+
+                    <div>
+                    <img className={styles.imgAprovados} src={NumerosAprovados} alt="" />
+                    <h4>195</h4>
+                    <p>Aprovados</p>
+                    </div>
+
+                    <div>
+                    <img className={styles.imgRejeitados} src={NumerosRejeitados} alt="" />
+                    <h4>41</h4>
+                    <p>Rejeitados</p>
+                    </div>
+                </section>
+
+                <section className={styles.containerSistema}>
+                    <img src={SistemaAtualizado} alt="logo Sistema atualuzado" />
+                    <a href="">Sistema Atualizado</a>
+                </section>
+            </main>
+            </div>
+
         </div>
-        <section>
-          <article>
-            <img src={SolicitarReembolso} alt="Solicitar reembolso" />
-            <p>Solicitar Reembolso</p>
-          </article>
-          <article>
-            <img src={Análise} alt="Análise do reembolso" />
-            <p>Verificar Análises</p>
-          </article>
-          <article>
-            <img src={SolicitarHistorico} alt="Solicitar Histórico" />
-            <p>Histórico</p>
-          </article>
-        </section>
-        <section>
-          <div>
-            <img src={NumerosSolicitados} alt="" />
-            <h4>182</h4>
-            <p>Solicitados</p>
-          </div>
-          <div>
-            <img src={NumeroAnálise} alt="" />
-            <h4>74</h4>
-            <p>Em análise</p>
-          </div>
-          <div>
-            <img src={NumerosAprovados} alt="" />
-            <h4>195</h4>
-            <p>Aprovados</p>
-          </div>
-          <div>
-            <img src={NumerosRejeitados} alt="" />
-            <h4>41</h4>
-            <p>Rejeitados</p>
-          </div>
-        </section>
-        <section>
-          <img src={SistemaAtualizado} alt="Logo sistema atualizado" />
-          <a href="">Sistema Atualizado</a>
-        </section>
-       </main>
-    </div>
   )
 }
