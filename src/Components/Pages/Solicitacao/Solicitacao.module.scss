@@ -1,0 +1,136 @@
+.layoutSolicitacao{
+    display: flex;
+}
+
+.primaryContainer{
+    width: 95vw;
+}
+
+.mainSolicitacao{
+    width: 100%
+}
+
+.formSolicitacao{
+    width: 99%;
+    display: flex;
+    justify-content: space-between;
+}
+
+label{
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #23282F;
+}
+
+input, select, textarea{
+    border-radius: 6px;
+    border: solid 0.8px #CBD4E1;
+    height: 3vh;
+    width: 100%;
+}
+
+.boxOne{
+    width: 32%;
+    height: 25vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.inputName{
+    width: 45%;
+}
+
+.inputEmpresa{
+    width: 25%;
+}
+
+.inputPrestacao{
+    width: 27%;
+}
+
+.inputDescription{
+    width: 100%;
+    textarea{
+        height: 10vh;
+    }
+}
+
+.verticalBar{
+    background-color: #CBD4E1;
+    height: 25vh;
+    width: 0.1vw;
+}
+
+.boxTwo{
+    width: 65%;
+    height: 25vh;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.inputData{
+    width: 20%;
+}
+
+.tipoDespesas{
+    width: 30%;
+}
+
+.centroDeCusto{
+    width: 47%;
+}
+
+.ordem, .divisoes, .pep, .distancia{
+    width: 8%;
+}
+
+.moeda, .valorKm, .valorFaturado, .despesa{
+    width: 12%;
+}
+
+.botoes{
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .botaoSalvar{
+        background-color: #001A3D;
+        color: #ffff;
+        width: 3.3vw;
+    }
+    .botaoDeletar{
+        width: 2.5vw;
+        background-color: #00BEDD;
+    }
+}
+
+.botaoSalvar:hover{
+    background-color: #00BEDD;
+    cursor: pointer;
+}
+
+.botaoDeletar:hover{
+    background-color: #001A3D;
+    cursor: pointer;
+}
+
+table{
+    border: solid 1px #CBD4E1;
+    width: 99%;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #CBD4E1;
+    font-size: 1rem;
+    font-weight: 400;
+    color:#23282F;
+}
+
+th,td{
+    border: solid 1px #CBD4E1;
+    text-align: center;
+}

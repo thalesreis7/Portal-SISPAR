@@ -1,0 +1,58 @@
+.navBarEstilo {
+    border: solid 1px #CBD4E1;
+    border-radius: 5px;
+    height: 100vh;
+    width: 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button{
+    background-color: #0844C4;
+    border-radius: 6px;
+    width: 2vw;
+    height: 4vh;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    transition: 300ms linear;
+    transform: scale(1.1);
+    background-color: #63758D;
+}
+
+.botaoHome{
+    @extend button;
+     margin-top: 0.3rem;
+}
+
+.botaoSair{
+    margin-bottom: 0.3rem;
+    background-color: #63758D;
+}
+
+.botaoSair:hover{
+    background-color: #0844C4;
+}
+
+.sectionNavBar {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 30vh;
+        width: 100%;
+    }
+}   

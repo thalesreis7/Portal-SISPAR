@@ -15,7 +15,6 @@ header {
     align-items: center;
     gap: 1rem;
     padding-left: 2rem;
-
     p {
         font-size: 1rem;
     }
@@ -57,6 +56,12 @@ article {
     img{
         margin-bottom: 1rem;
     }
+}
+
+article:hover{
+    transition: 300ms linear;
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .containerStatus {
