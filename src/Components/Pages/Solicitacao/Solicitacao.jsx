@@ -9,7 +9,6 @@ import Deletar from "../../../assets/Solicitacao/deletar.png";
 import Lixeira from "../../../assets/Solicitacao/lixeira.png";
 import Motivo from "../../../assets/Solicitacao/motivo.png";
 
-
 export default function Solicitacao() {
 
   const [colaborador, setColaborador] = useState(""); // Estado para o campo colaborador
