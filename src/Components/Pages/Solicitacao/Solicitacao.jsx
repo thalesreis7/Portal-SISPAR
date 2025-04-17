@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import Api from "../../../Services/Api"
 import React from "react";
 import Home from "../../../assets/Dashboard/home header.png";
 import Seta from "../../../assets/Dashboard/Vector.png";
@@ -6,7 +8,7 @@ import styles from "./Solicitacao.module.scss";
 import Deletar from "../../../assets/Solicitacao/deletar.png";
 import Lixeira from "../../../assets/Solicitacao/lixeira.png";
 import Motivo from "../../../assets/Solicitacao/motivo.png";
-import { useState } from "react";
+
 export default function Solicitacao() {
 
   const [colaborador, setColaborador] = useState(""); // Estado para o campo colaborador
@@ -50,8 +52,63 @@ export default function Solicitacao() {
       despesa,
     };
     setDadosReembolso(dadosReembolso.concat(objetosReembolso))
+    limparCampos();
   };
   
+  //Função para limpar campos do formúlario
+
+  const limparCampos = () => {
+    setColaborador(""),
+    setEmpresa(""),
+    setnPrestacao(""),
+    setDescricao(""),
+    setData(""),
+    setMotivo(""),
+    setTipoReembolso(""),
+    setCentroCusto(""),
+    setOrdemInterna(""),
+    setDivisao(""),
+    setPep(""),
+    setMoeda(""),
+    setDistanciaKm(""),
+    setValorKm(""),
+    setValorFaturado(""),
+    setDespesa("");
+  };
+
+  //Função para enviar dados para API
+
+  const [foiEnviado, setFoiEnviado] = useState(false); //Estado para saber se o formulario foi enviado.
+
+  const enviarParaAnalise = async () => {
+    try{
+      // Const response  = O resultado da resposta do servidor
+      // await = faz com que o código espere a resposta da API
+      // Api é a nossa api
+      // post é um método que serve para enviar algo para o servidor
+      //post(argumentos) = 1º argumento é o caminho da rota, 2º argumento é o que será enviado.
+      const response = await Api.post("/refound/new",dadosReembolso)
+      console.log("Resposta da API", response);
+      alert("Reembolso solicitado com sucesso!")// mostra um alerta para o usuário
+      setFoiEnviado(true)
+    }catch(error){// Caso der erro na hora de enviar ele mostra no console
+      console.log("Erro ao enviar", error);
+    }
+  };
+
+  useEffect(()=>{
+    if(foiEnviado){
+      setDadosReembolso([]);// Zera o formulário depois do envio
+      setFoiEnviado(false) //Volta o estado original(false)
+    }
+  },[foiEnviado]) //observe essa variável
+
+  //Resumo simplificado:
+  //useState cria variáveis que guardam informações e atualizam a tela.
+  //A função enviarParaAnalise manda os dados pra um servidor (API).
+  // useEffect roda automaticamente quando a variável foiEnviado muda.
+  //Depois que os dados são enviados, ele limpa tudo pra poder começar de novo.
+
   return (
     <div className={styles.layoutSolicitacao}>
       <NavBar/>
@@ -64,68 +121,110 @@ export default function Solicitacao() {
           <p>Solicitação de Reembolso</p>
         </header>
         <main className={styles.mainSolicitacao}>
-          <form className={styles.formSolicitacao} onSubmit={(e)=> e.preventDefault}>
+          <form className={styles.formSolicitacao} onSubmit={(e)=> e.preventDefault()}>
             <div className={styles.boxOne}>
               <div className={styles.inputName}>
-                <label htmlFor="">Nome Completo</label>
-                <input type="text" value={colaborador} onChange={(e)=> setColaborador(e.target.value)}/>
+                <label htmlFor="nome">Nome Completo</label>
+                <input 
+                  value={colaborador} 
+                  name="colaborador" 
+                  type="text" 
+                  onChange={(e)=> setColaborador(e.target.value)}/>
               </div>
               <div className={styles.inputEmpresa}>
-                <label htmlFor="">Empresa</label>
-                <input type="text" value={empresa} onChange={(e)=> setEmpresa(e.target.value)}/>
+                <label htmlFor="empresa">Empresa</label>
+                <input 
+                name="empresa" 
+                value={empresa} 
+                type="text" 
+                onChange={(e)=> setEmpresa(e.target.value)}/>
               </div>
               <div className={styles.inputPrestacao}>
-                <label htmlFor="">Nº Prest. Contas</label>
-                <input type="text" value={nPrestacao} onChange={(e)=> setnPrestacao(e.target.value)}/>
+                <label htmlFor="prestacao">Nº Prest. Contas</label>
+                <input 
+                  value={nPrestacao} 
+                  type="number"
+                  name="nPrestacao" 
+                  onChange={(e)=> setnPrestacao(e.target.value)}/>
               </div>
               <div className={styles.inputDescription}>
-                <label htmlFor="">Descrição / Motivo do Reembolso</label>
-                <textarea name="descricao" id="" value={descricao} onChange={(e)=> setDescricao(e.target.value)}></textarea>
+                <label htmlFor="descricao">Descrição / Motivo do Reembolso</label>
+                <textarea 
+                  name="descricao" 
+                  value={descricao} 
+                  onChange={(e)=> setDescricao(e.target.value)}
+                ></textarea>
               </div>
             </div>
             <div className={styles.verticalBar}></div>
             <div className={styles.boxTwo}>
               <div className={styles.inputData}>
-                <label htmlFor="">Data</label>
-                <input type="date" value={data} onChange={(e)=> setData(e.target.value)}/>
+                <label htmlFor="date">Data</label>
+                <input 
+                  value={data} 
+                  type="date"
+                  name="date" 
+                  onChange={(e)=> setData(e.target.value)}/>
               </div>
               <div className={styles.tipoDespesas}>
-                <label htmlFor="">Tipo de Despesas</label>
-                <select value={tipoReembolso} name="tipoReembolso" id=""  onChange={(e)=> setTipoReembolso(e.target.value)}>
-                  <option value="">Selecionar</option>
-                  <option value="">Alimentação</option>
-                  <option value="">Combustível</option>
-                  <option value="">Condução</option>
-                  <option value="">Estacionamento</option>
-                  <option value="">Viagem Admin.</option>
-                  <option value="">Viagem Operacional</option>
-                  <option value="">Eventos de representação</option>
+                <label htmlFor="tipoReembolso">Tipo de Despesas</label>
+                <select 
+                  value={tipoReembolso} 
+                  name="tipoReembolso" 
+                  onChange={(e)=> setTipoReembolso(e.target.value)}>
+                    <option value="selecionar">Selecionar</option>
+                    <option value="alimentação">Alimentação</option>
+                    <option value="combustivel">Combustível</option>
+                    <option value="condução">Condução</option>
+                    <option value="estacionamento">Estacionamento</option>
+                    <option value="viagem adm">Viagem Admin.</option>
+                    <option value="viagem oper">Viagem Operacional</option>
+                    <option value="eventos">Eventos de representação</option>
                 </select>
               </div>
                 <div className={styles.centroDeCusto}>
-                  <label htmlFor="">Centro de Custo</label>
-                  <select  value={centroCusto} name="centroCusto" id="" onChange={(e)=> setCentroCusto(e.target.value)}>
+                  <label htmlFor="custo">Centro de Custo</label>
+                  <select 
+                    value={centroCusto} 
+                    name="centroCusto" 
+                    onChange={(e)=> setCentroCusto(e.target.value)}>
                     <option value="">Selecionar</option>
-                    <option value="">1100109002 - FIN CONTROLES INTERNOS MTZ</option>
-                    <option value="">1100110002 - FIN VICE-PRESIDENCIA FINANÇAS MTZ</option>
-                    <option value="">1100110101 - FIN CONTABILIDADE MTZ</option>
+                    <option value="FIN CONTROLES INTERNOS MTZ">1100109002 - FIN CONTROLES INTERNOS MTZ</option>
+                    <option value="FIN VICE-PRESIDENCIA FINANCAS MTZ">1100110002 - FIN VICE-PRESIDENCIA FINANÇAS MTZ</option>
+                    <option value="FIN CONTABILIDADE MTZ">1100110101 - FIN CONTABILIDADE MTZ</option>
                   </select>
                 </div>
                 <div className={styles.ordem}>
-                  <label htmlFor="">Ord. Int.</label>
-                  <input name="ordemInterna" type="text" value={ordemInterna} onChange={(e)=> setOrdemInterna(e.target.value)}/>
+                  <label htmlFor="ordemInterna">Ord. Int.</label>
+                  {/* mudar para num o type */}
+                  <input 
+                    value={ordemInterna} 
+                    name="ordemInterna" 
+                    type="number" 
+                    onChange={(e)=> setOrdemInterna(e.target.value)}/>
                 </div>
                 <div className={styles.divisoes}>
-                  <label htmlFor="">Div.</label>
-                  <input  name="divisao" type="number" value={divisao} onChange={(e)=> setDivisao(e.target.value)}/>
+                  <label htmlFor="divisao">Div.</label>
+                  <input 
+                    name="divisao" 
+                    type="number" 
+                    value={divisao} 
+                    onChange={(e)=> setDivisao(e.target.value)}/>
                 </div>
                 <div className={styles.pep}>
-                  <label htmlFor="">PEP</label>
-                  <input name="pep" type="number" value={pep} onChange={(e)=> setPep(e.target.value)}/>
+                  <label htmlFor="pep">PEP</label>
+                  <input 
+                    name="pep" 
+                    type="number" 
+                    value={pep} 
+                    onChange={(e)=> setPep(e.target.value)}/>
                 </div>
                 <div className={styles.moeda}>
-                  <label htmlFor="">Moeda</label>
-                  <select name="moeda" id="" value={moeda} onChange={(e)=> setMoeda(e.target.value)}>
+                  <label htmlFor="moeda">Moeda</label>
+                  <select 
+                    name="moeda"  
+                    value={moeda} 
+                    onChange={(e)=> setMoeda(e.target.value)}>
                     <option value="">Selecionar</option>
                     <option value="brl">BRL</option>
                     <option value="ars">ARS</option>
@@ -133,25 +232,47 @@ export default function Solicitacao() {
                   </select>
                 </div>
                 <div className={styles.distancia}>
-                  <label htmlFor="">Dist / Km</label>
-                  <input type="text" name="distanciaKm" id="" value={distanciaKm} onChange={(e)=> setDistanciaKm(e.target.value)}/>
+                  <label htmlFor="distancia">Dist / Km</label>
+                  <input 
+                    type="number" 
+                    name="distanciaKm"  
+                    value={distanciaKm} 
+                    onChange={(e)=> setDistanciaKm(e.target.value)}/>
                 </div>
                 <div className={styles.valorKm}>
-                  <label htmlFor="">Valor / Km</label>
-                  <input type="number" name="valorKm" id=""  value={valorKm} onChange={(e)=> setValorKm(e.target.value)}/>
+                  <label htmlFor="valor">Valor / Km</label>
+                  <input 
+                    type="number" 
+                    name="valorKm"  
+                    value={valorKm} 
+                    onChange={(e)=> setValorKm(e.target.value)}/>
                 </div>
                 <div className={styles.valorFaturado}>
-                  <label htmlFor="">Val. Faturado</label>
-                  <input type="number" name="valorFaturado" id="" value={valorFaturado} onChange={(e)=> setValorFaturado(e.target.value)}/>
+                  <label htmlFor="faturado">Val. Faturado</label>
+                  <input 
+                    type="number" 
+                    name="valorFaturado"  
+                    value={valorFaturado} 
+                    onChange={(e)=> setValorFaturado(e.target.value)}/>
                 </div>
                 <div className={styles.despesa}>
-                  <label htmlFor="">Despesa</label>
-                  <input type="number" name="despesa" id="" value={despesa} onChange={(e)=> setDespesa(e.target.value)}/>
+                  <label htmlFor="taxa">Despesa</label>
+                  <input 
+                    type="number" 
+                    name="despesa"  
+                    value={despesa} 
+                    onChange={(e)=> setDespesa(e.target.value)}/>
                 </div>
                 <div className={styles.botoes}>
-                  <button className={styles.botaoSalvar} onClick={handleSubmit}>Salvar</button>
-                  <button className={styles.botaoDeletar}>
-                  <img src={Deletar} alt="" /></button>
+                  <button className={styles.botaoSalvar}
+                    type="submit"
+                    onClick={handleSubmit}>Salvar
+                  </button>
+                  <button className={styles.botaoDeletar}
+                    type="button"
+                    onClick={limparCampos}>
+                  <img src={Deletar} alt="imagem do botão de deletar"/>
+                  </button>
                 </div>
             </div>
           </form>
@@ -179,7 +300,8 @@ export default function Solicitacao() {
             <tbody>
               {dadosReembolso.map((item, index) => (
                 <tr key={index}>
-                <td><img src={Lixeira} alt="icone lixeira" /></td>
+                <td>
+                <img src={Lixeira} alt="icone lixeira" /></td>
                 <td>{item.colaborador}</td>
                 <td>{item.empresa}</td>
                 <td>{item.nPrestacao}</td>
@@ -199,6 +321,7 @@ export default function Solicitacao() {
               ))}
             </tbody>
           </table>
+          <button className={styles.botaoAnalise} onClick={enviarParaAnalise}>Enviar para análise</button>
         </main>
       </div>
     </div>

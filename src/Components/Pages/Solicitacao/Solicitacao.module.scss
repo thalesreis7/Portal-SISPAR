@@ -96,20 +96,22 @@ input, select, textarea{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .botaoSalvar{
-        background-color: #001A3D;
-        color: #ffff;
-        width: 3.3vw;
-    }
-    .botaoDeletar{
-        width: 2.5vw;
-        background-color: #00BEDD;
-    }
+}
+
+.botaoSalvar{
+    background-color: #001A3D;
+    color: #ffff;
+    width: 3.3vw;
 }
 
 .botaoSalvar:hover{
     background-color: #00BEDD;
     cursor: pointer;
+}
+
+.botaoDeletar{
+    width: 2.5vw;
+    background-color: #00BEDD;
 }
 
 .botaoDeletar:hover{
@@ -133,4 +135,18 @@ th{
 th,td{
     border: solid 1px #CBD4E1;
     text-align: center;
+}
+
+.botaoAnalise{
+    background-color: #001A3D;
+    color: #ffff;
+    width: 10vw;
+    margin-top: 9px;
+    height: 4vh;
+    position: relative;
+    left: 88.5%;
+}
+.botaoAnalise:hover{
+    background-color: #00BEDD;
+    cursor: pointer;
 }
